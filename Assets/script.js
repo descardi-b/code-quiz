@@ -1,7 +1,7 @@
 // global variables for DOM elements3
 var body = document.body;
 var quizTitle = document.querySelector(".quiz-title");
-var countdown = document.querySelector(".countdown");
+var countdown;
 var startQuizButton = document.querySelector(".start-quiz");
 var quizInfoHead = document.querySelector(".quiz-info-head");
 var quizInfoBody = document.querySelector(".quiz-info-body");
@@ -13,42 +13,57 @@ var quizAnswerTwo;
 var quizAnswerThree;
 var quizAnswerFour;
 var currentIndex = 0;
+var timeInterval;
 
-var timeLeft = 60;
+var timeLeft = 5;
 
-var highScore = 0
-localStorage.setItem("highScore", 0);
+// checking local storage for current high score
+var highScore = localStorage.getItem("highScore")
+if (!highScore) {
+  highScore = 0;
+} else {
+  highScore = parseInt(highScore);
+};
+console.log(highScore);
 
 var userScore = 0
 // localStorage.setItem()
 
+// starting the quiz
 startQuizButton.addEventListener("click", startCount);
 
+// starting the quiz timer
 function startCount() {
 
+  // remove initial quiz info
   quizInfoHead.remove();
   quizInfoBody.remove();
   startQuizButton.remove();
 
+  // putting in the countdown
+  var header = document.querySelector("header");
+  countdown = document.createElement("h2");
+  countdown.className = "countdown";
+  countdown.textContent = timeLeft;
+
+  header.appendChild(countdown);
+
   // TODO: Use the `setInterval()` method to call a function to be executed every 1000 milliseconds
-  var timeInterval = setInterval(function () {
-    if (timeLeft > 1) {
-      countdown.textContent = `${timeLeft}`;
+  timeInterval = setInterval(function () {
+    if (timeLeft >= 1) {
       timeLeft--;
-    } else if (timeLeft === 1) {
       countdown.textContent = `${timeLeft}`;
-      timeLeft--;
-    } else if (timeLeft === 0) {
-      clearInterval(timeInterval);
-      countdown.textContent = "0";
-      quizTitle.textContent = "Game Over!"
+    } else {
+      stopQuiz();
+      // clearInterval(timeInterval);
+      // countdown.textContent = "0";
+      // quizTitle.textContent = "Game Over!"
     }
   }, 1000);
   questionsLoop();
 };
 
 // array for quiz questions and answers
-
 var questionsAndAnswers = [{
   question: "Which of these is NOT a type of value in programming?",
   answerOne: "Boolean",
@@ -64,7 +79,7 @@ var questionsAndAnswers = [{
   answerFour: "cherryorchard",
   correctAnswer: "joyLuckClub",
 }, {
-  question: `How would you correctly call a function named "doTHis"?`,
+  question: `How would you correctly call a function named "doThis"?`,
   answerOne: "doThis()",
   answerTwo: "dothis()",
   answerThree: "dothis();",
@@ -79,12 +94,11 @@ var questionsAndAnswers = [{
   correctAnswer: "Yes!",
 }];
 
-// question and answers function loop
-
+// appending the questions and answer elements
 var questionsLoop = function () {
   quizQuestion = document.createElement("h2");
   quizQuestion.className = "quiz-question";
-  quizQuestion.textContent = questionsAndAnswers[currentIndex].question;
+  // quizQuestion.textContent = questionsAndAnswers[currentIndex].question;
   quizBox.appendChild(quizQuestion);
 
   quizAnswerBox = document.createElement("ul");
@@ -99,11 +113,6 @@ var questionsLoop = function () {
   quizAnswerThree.className = "quiz-answer";
   quizAnswerFour.className = "quiz-answer";
 
-  quizAnswerOne.textContent = questionsAndAnswers[currentIndex].answerOne;
-  quizAnswerTwo.textContent = questionsAndAnswers[currentIndex].answerTwo;
-  quizAnswerThree.textContent = questionsAndAnswers[currentIndex].answerThree;
-  quizAnswerFour.textContent = questionsAndAnswers[currentIndex].answerFour;
-
   quizBox.appendChild(quizAnswerBox);
   quizBox.appendChild(quizAnswerOne);
   quizBox.appendChild(quizAnswerTwo);
@@ -115,15 +124,14 @@ var questionsLoop = function () {
   quizAnswerThree.addEventListener("click", answerCheck);
   quizAnswerFour.addEventListener("click", answerCheck);
 
+  updateQuestions();
 };
 
-var answerCheck = function(event) {
-  console.log(event.target);
-  console.log(event.target.textContent);
+// checking if the user selected the right answer
+var answerCheck = function (event) {
 
   if (event.target.textContent === questionsAndAnswers[currentIndex].correctAnswer) {
     userScore++
-    console.log(userScore);
     quizQuestion.textContent = "Correct!";
   } else {
     timeLeft = timeLeft - 15;
@@ -131,7 +139,52 @@ var answerCheck = function(event) {
   }
 
   currentIndex++
-
-
-
+  updateQuestions();
 };
+
+// update the next question and answers
+var updateQuestions = function () {
+  if (currentIndex < questionsAndAnswers.length) {
+    quizQuestion.textContent = questionsAndAnswers[currentIndex].question;
+    quizAnswerOne.textContent = questionsAndAnswers[currentIndex].answerOne;
+    quizAnswerTwo.textContent = questionsAndAnswers[currentIndex].answerTwo;
+    quizAnswerThree.textContent = questionsAndAnswers[currentIndex].answerThree;
+    quizAnswerFour.textContent = questionsAndAnswers[currentIndex].answerFour;
+  } else {
+    stopQuiz();
+  }
+};
+
+// stop the quiz
+var stopQuiz = function () {
+  quizAnswerOne.remove();
+  quizAnswerTwo.remove();
+  quizAnswerThree.remove();
+  quizAnswerFour.remove();
+  clearInterval(timeInterval);
+
+  countdown.textContent = "0";
+  quizTitle.textContent = "Game Over!"
+  quizQuestion.textContent = `You scored ${userScore} points.`;
+
+  quizInfoBody.textContent = "Enter your initials to save your score:";
+  quizBox.appendChild(quizInfoBody);
+
+  var userNameInput = document.createElement("input");
+  quizBox.appendChild(inputBox);
+
+  // check if user score is greater than current high score
+  if (userScore > highScore) {
+    highScore = userScore;
+  }
+
+  var userObject = {
+    name: userNameInput,
+    score: userScore,
+  };
+
+  localStorage.setItem("highScore", highScore);
+  localStorage.setItem("userScore", userObject); 
+}
+
+
