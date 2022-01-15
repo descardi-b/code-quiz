@@ -15,7 +15,7 @@ var quizAnswerFour;
 var currentIndex = 0;
 var timeInterval;
 
-var timeLeft = 5;
+var timeLeft = 60;
 
 // checking local storage for current high score
 var highScore = localStorage.getItem("highScore")
