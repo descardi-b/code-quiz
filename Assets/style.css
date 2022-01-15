@@ -61,6 +61,35 @@ body {
     padding-right: 20px;
 }
 
+.quiz-question {
+    font-size: 24px;
+    font-family: georgia;
+    color: palegreen;
+    -webkit-text-stroke: 1px black;
+    text-align: center;
+    display: flex;
+}
+
+.quiz-answer {
+    font-size: 18px;
+    font-family: georgia;
+    color:rgb(255, 187, 228);
+    -webkit-text-stroke: 1px rgb(45, 108, 64);
+    background-color:palegreen;
+    display: flex;
+    margin-bottom: 10px;
+    border-radius: 25px;
+    width: 30%;
+    border: 1px solid black;
+    padding-left: 5px;
+}
+
+.quiz-answer:hover {
+    color:rgb(255, 224, 187);
+    -webkit-text-stroke: 1px rgb(230, 166, 70);
+    background-color:rgb(199, 125, 160);
+}
+
 .start-quiz {
     font-size: 24px;
     font-family: lobster;
