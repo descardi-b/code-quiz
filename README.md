@@ -19,4 +19,4 @@ here are some screenshots of my work:
 
 <br />
 
-you can view the deployed application here: <a href=“https://descardi-b.github.io/code-quiz/“>https://descardi-b.github.io/code-quiz</a>
+you can view the deployed application here: <a href=“https://descardi-b.github.io/code-quiz/“>https://descardi-b.github.io/code-quiz/</a>
