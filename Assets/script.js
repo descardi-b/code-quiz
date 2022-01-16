@@ -192,6 +192,8 @@ var scoringFunction = function() {
 if (userScore > highScore) {
   highScore = userScore;
   topHighScoreName = userNameInput.value.trim();
+} else {
+  topHighScoreName = "GLaDOS";
 }
 
 JSON.stringify(userScore);
