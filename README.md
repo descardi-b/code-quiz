@@ -1,42 +1,22 @@
-# 04 Web APIs: Code Quiz
+# 🌸 welcome to my coding quiz! 🌸 
 
-As you proceed in your career as a web developer, you will probably be asked to complete a coding assessment, which is typically a combination of multiple-choice questions and interactive challenges. For this challenge, you will build a timed code quiz that's made up of multiple-choice questions. This app will run in the browser and feature dynamically updated HTML and CSS powered by your JavaScript code. It will also feature a clean and polished user interface and be responsive, ensuring that it adapts to multiple screen sizes.
+here's a quiz all about coding that i developed for the UC Berkeley full stack development course. <br /><br />
 
-## User Story
+in this assignment, i was tasked with:
+<br /><br />
 
-```
-AS A coding boot camp student
-I WANT to take a timed quiz on JavaScript fundamentals that stores high scores
-SO THAT I can gauge my progress compared to my peers
-```
+🍓 creating a dynamic and interactive quiz with a countdown timer <br />
+🍓 storing all user scores and the current high score to local storage <br />
+🍓 retrieving these scores from local storage to then dynamically add them to the webpage <br /><br />
+🍓 designing the webpage to be responsive <br /><br />
 
-## Acceptance Criteria
+here are some screenshots of my work: 
+<br /><br />
 
-```
-GIVEN I am taking a code quiz
-WHEN I click the Start button
-THEN a timer starts and I am presented with a question
-WHEN I answer a question
-THEN I am presented with another question
-WHEN I answer a question incorrectly
-THEN time is subtracted from the clock
-WHEN all questions are answered or the timer reaches 0
-THEN the game is over
-WHEN the game is over
-THEN I can save my initials and score
-```
+<img src="./Assets/images/coding-quiz-img-1">
+<img src="./Assets.images.coding-quiz-img-2">
+<img src="./Assets.images.coding-quiz-img-3">
 
-The following animation demonstrates the application functionality:
+<br />
 
-![Demonstration of the Coding Quiz Challenge.](./Assets/04-web-apis-homework-demo.gif)
-
-### Review
-
-You are required to submit the following for review:
-
-* The URL of the functional, deployed application.
-
-* The URL of the GitHub repository. Give the repository a unique name and include a README describing the project.
-
----
-© 2022 Trilogy Education Services, LLC, a 2U, Inc. brand. Confidential and Proprietary. All Rights Reserved.
+you can view the deployed application here: <a href=“https://descardi-b.github.io/code-quiz/“>https://descardi-b.github.io/code-quiz</a>
