@@ -193,7 +193,7 @@ if (userScore > highScore) {
   highScore = userScore;
   topHighScoreName = userNameInput.value.trim();
 } else {
-  topHighScoreName = "GLaDOS";
+  topHighScoreName = "Top High Score:";
 }
 
 JSON.stringify(userScore);
@@ -207,22 +207,35 @@ var userObject = {
 
 localStorage.setItem("Top High Score Name", topHighScoreName);
 localStorage.setItem("High Score", highScore);
-localStorage.setItem(`${userObject.name}`, userObject.score); 
+// localStorage.setItem("User Score", allScores); 
+
+var allScores = JSON.parse(localStorage.getItem("User Score")) 
+if (allScores === null) {
+  allScores = [];
+};
+
+allScores.push(userObject);
+
+localStorage.setItem("User Score", JSON.stringify(allScores));
 
 quizQuestion.textContent = "Scoreboard";
 quizInfoBody.remove();
 submitUserInfo.remove();
 userNameInput.remove();
 
+quizBox.appendChild(quizAnswerBox);
+
 var highScoreDisplay = document.createElement("li");
 highScoreDisplay.className = "quiz-answer";
 highScoreDisplay.textContent = localStorage.getItem("Top High Score Name") + ": " + localStorage.getItem("High Score");
 
-var userScoreDisplay = document.createElement("li");
-userScoreDisplay.className = "quiz-answer";
-userScoreDisplay.textContent = userObject.name + ": " + localStorage.getItem(`${userObject.name}`);
-
-quizBox.appendChild(quizAnswerBox);
 quizAnswerBox.appendChild(highScoreDisplay);
-quizAnswerBox.appendChild(userScoreDisplay);
+
+allScores.forEach(element => {
+  var userScoreDisplay = document.createElement("li");
+  userScoreDisplay.className = "quiz-answer";
+  userScoreDisplay.textContent = `${element.name}: ${element.score}`;
+  quizAnswerBox.appendChild(userScoreDisplay);
+});
+
 };
