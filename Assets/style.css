@@ -138,3 +138,40 @@ footer {
 footer a {
     color:rgb(184, 74, 74);
 }
+
+
+@media screen and (max-width: 768px) {
+    .quiz-title {
+        display: flex;
+        font-size: 48px;
+        text-align: center;
+        width: 40%;
+        margin-left: 140px;
+    }
+
+    .quiz-info-head {
+        font-size: 28px;
+    }
+
+    .quiz-info-body {
+        font-size: 24px;
+        text-align: center;
+    }
+
+    .quiz-box {
+        width: 60%;
+    }
+
+    .countdown {
+       display: flex;
+    }
+
+
+    .quiz-question {
+    font-size: 28px;
+    }
+
+    .quiz-answer {
+    font-size: 24px;
+    }
+};
