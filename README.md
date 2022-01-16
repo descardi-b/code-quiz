@@ -14,8 +14,8 @@ here are some screenshots of my work:
 <br /><br />
 
 <img src="./Assets/images/coding-quiz-img-1">
-<img src="./Assets.images.coding-quiz-img-2">
-<img src="./Assets.images.coding-quiz-img-3">
+<img src="./Assets/images/coding-quiz-img-2">
+<img src="./Assets/images/coding-quiz-img-3">
 
 <br />
 
