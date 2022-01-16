@@ -14,20 +14,21 @@ var quizAnswerThree;
 var quizAnswerFour;
 var currentIndex = 0;
 var timeInterval;
+var userNameInput;
+var submitUserInfo;
+var highScoreName;
 
 var timeLeft = 60;
 
 // checking local storage for current high score
-var highScore = localStorage.getItem("highScore")
+var highScore = localStorage.getItem("High Score")
 if (!highScore) {
   highScore = 0;
 } else {
   highScore = parseInt(highScore);
 };
-console.log(highScore);
 
 var userScore = 0
-// localStorage.setItem()
 
 // starting the quiz
 startQuizButton.addEventListener("click", startCount);
@@ -131,7 +132,7 @@ var questionsLoop = function () {
 var answerCheck = function (event) {
 
   if (event.target.textContent === questionsAndAnswers[currentIndex].correctAnswer) {
-    userScore++
+    userScore = userScore + timeLeft;
     quizQuestion.textContent = "Correct!";
   } else {
     timeLeft = timeLeft - 15;
@@ -170,21 +171,56 @@ var stopQuiz = function () {
   quizInfoBody.textContent = "Enter your initials to save your score:";
   quizBox.appendChild(quizInfoBody);
 
-  var userNameInput = document.createElement("input");
-  quizBox.appendChild(inputBox);
+  userNameInput = document.createElement("input");
+  userNameInput.setAttribute("type", "text");
+  userNameInput.setAttribute("id", "user-initials");
+  userNameInput.className = "input-box";
+  quizBox.appendChild(userNameInput);
 
-  // check if user score is greater than current high score
-  if (userScore > highScore) {
-    highScore = userScore;
-  }
+  submitUserInfo = document.createElement("btn");
+  submitUserInfo.className = "start-quiz";
+  submitUserInfo.textContent = "Submit!";
 
-  var userObject = {
-    name: userNameInput,
-    score: userScore,
-  };
+  quizBox.appendChild(submitUserInfo);
 
-  localStorage.setItem("highScore", highScore);
-  localStorage.setItem("userScore", userObject); 
+  submitUserInfo.addEventListener("click", scoringFunction);
 }
 
+var scoringFunction = function() {
 
+  // check if user score is greater than current high score
+if (userScore > highScore) {
+  highScore = userScore;
+  topHighScoreName = userNameInput.value.trim();
+}
+
+JSON.stringify(userScore);
+JSON.stringify(highScore);
+JSON.stringify(topHighScoreName);
+
+var userObject = {
+  name: userNameInput.value.trim(),
+  score: userScore,
+};
+
+localStorage.setItem("Top High Score Name", topHighScoreName);
+localStorage.setItem("High Score", highScore);
+localStorage.setItem(`${userObject.name}`, userObject.score); 
+
+quizQuestion.textContent = "Scoreboard";
+quizInfoBody.remove();
+submitUserInfo.remove();
+userNameInput.remove();
+
+var highScoreDisplay = document.createElement("li");
+highScoreDisplay.className = "quiz-answer";
+highScoreDisplay.textContent = localStorage.getItem("Top High Score Name") + ": " + localStorage.getItem("High Score");
+
+var userScoreDisplay = document.createElement("li");
+userScoreDisplay.className = "quiz-answer";
+userScoreDisplay.textContent = userObject.name + ": " + localStorage.getItem(`${userObject.name}`);
+
+quizBox.appendChild(quizAnswerBox);
+quizAnswerBox.appendChild(highScoreDisplay);
+quizAnswerBox.appendChild(userScoreDisplay);
+};

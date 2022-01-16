@@ -100,6 +100,18 @@ body {
     border-radius: 25px;
     border: solid;
     border-color:rgb(206, 77, 77);
+    margin: auto;
+}
+
+.input-box {
+    font-family: georgia;
+    -webkit-text-stroke: 1px rgb(208, 78, 78);
+    color:rgb(242, 108, 144);
+    border: 1px solid black;
+    border-radius: 25px;
+    display: block;
+    margin: auto;
+    margin-bottom: 30px;
 }
 
 footer {
