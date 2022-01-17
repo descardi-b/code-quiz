@@ -227,7 +227,7 @@ quizBox.appendChild(quizAnswerBox);
 
 var highScoreDisplay = document.createElement("li");
 highScoreDisplay.className = "quiz-answer";
-highScoreDisplay.textContent = localStorage.getItem("Top High Score Name") + ": " + localStorage.getItem("High Score");
+highScoreDisplay.textContent = "Current High Score, " + localStorage.getItem("Top High Score Name") + ": " + localStorage.getItem("High Score");
 
 quizAnswerBox.appendChild(highScoreDisplay);
 
