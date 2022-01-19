@@ -193,7 +193,7 @@ if (userScore > highScore) {
   highScore = userScore;
   topHighScoreName = userNameInput.value.trim();
 } else {
-  topHighScoreName = "Top High Score:";
+  topHighScoreName = "";
 }
 
 JSON.stringify(userScore);
